@@ -70,8 +70,8 @@ async function run(){
 
     app.get('/appoinments' , verifyToken, async (req,res)=>{
       const email = req.query.email
-      const date = new Date(req.query.date).toUTCString()
-      console.log(date)
+      const date = req.query.date
+      
       const query = {email: email,date: date}
       const cursor = appoinmentsCollection.find(query)
       const appoinments = await cursor.toArray()
@@ -117,10 +117,11 @@ async function run(){
 
     app.get('/users/:email', async (req,res)=>{
       const email = req.params.email;
-      
+      console.log(email)
       const query = {email:email}
       const user = await usersCollection.findOne(query)
       let isAdmin = false
+      console.log(user)
       if(user?.role === 'admin')
       {
         isAdmin = true
