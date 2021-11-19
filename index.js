@@ -175,16 +175,16 @@ async function run(){
       res.json({admin: isAdmin})
     })
 
-    app.post('/create-payment-intent', async(req,res)=>{
+    app.post('/create-payment-intent', async (req, res) => {
       const paymentInfo = req.body;
-      const amount = paymentInfo.price*100
+      const amount = paymentInfo.price * 100;
       const paymentIntent = await stripe.paymentIntents.create({
-        currency: "usd",
-        amount: amount,
-        payment_method_types:['card']
-      })
-      res.json({clientSecret: paymentIntent.client_secret})
-    })
+          currency: 'usd',
+          amount: amount,
+          payment_method_types: ['card']
+      });
+      res.json({ clientSecret: paymentIntent.client_secret })
+  })
   }
 
 
